@@ -26,7 +26,7 @@ public class HelloController {
     }
 
     @GetMapping("/reverse")
-    public Reverse reverse(@RequestParam String text) {
+    public Reverse reverse(@RequestParam(defaultValue = "") String text) {
         String reversed = new StringBuilder(text).reverse().toString();
         return new Reverse(reversed, text.length());
     }
@@ -35,25 +35,16 @@ public class HelloController {
             String message,
             String owner,
             LocalDateTime timestamp
-    ) {
-    }
+    ) {}
 
     public record Info(
             String owner,
             String javaVersion,
             int cpuCores
-    ) {
-    }
+    ) {}
 
     public record Reverse(
             String reversed,
             int length
-    ) {
-    }
-}
-    @GetMapping("/api/reverse")
-    public Reverse reverse(@RequestParam(defaultValue = "") String text) {
-        String reversed = new StringBuilder(text).reverse().toString();
-        return new Reverse(reversed, reversed.length());
-    }
+    ) {}
 }
