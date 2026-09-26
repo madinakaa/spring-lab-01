@@ -1,0 +1,33 @@
+package kz.iitu.spring_lab_01.scope;
+
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
+
+@Component
+public class TicketOffice {
+
+    private final Ticket direct;
+    private final ObjectProvider<Ticket> provider;
+
+    public TicketOffice(Ticket direct, ObjectProvider<Ticket> provider) {
+        this.direct = direct;
+        this.provider = provider;
+    }
+
+    public Map<String, Object> demo() {
+        String direct1 = direct.getId();
+        String direct2 = direct.getId();
+
+        String fresh1 = provider.getObject().getId();
+        String fresh2 = provider.getObject().getId();
+
+        return Map.of(
+                "injectedDirectly", List.of(direct1, direct2),
+                "viaProvider", List.of(fresh1, fresh2),
+                "office", System.identityHashCode(this)
+        );
+    }
+}
