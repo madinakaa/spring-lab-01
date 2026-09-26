@@ -8,11 +8,18 @@ server:
 app:
   owner: Madina Sultankhan
   group: IS-2401
+
   mail:
     from: no-reply@iitu.kz
     retry-count: 3
     timeout: 5s
     enabled: true
+
+  export:
+    formats:
+      - CSV
+      - PDF
+    max-rows: 1000
 
 logging:
   level:
